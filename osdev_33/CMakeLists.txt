@@ -95,7 +95,7 @@ message("CMAKE_ASM_FLAGS=${CMAKE_ASM_FLAGS}")
 # We use the nasm compiler
 # And we must set the correct elf format
 ########################################
-# Specifies that .s and .S extension belongs to the ASM compiler
+# Specifies that .s and .S extension belongs to the ASM compiler so all file ending with s, S and asm are assembly files
 set(CMAKE_ASM_NASM_SOURCE_FILE_EXTENSIONS ${CMAKE_ASM_NASM_SOURCE_FILE_EXTENSIONS} s S asm)
 # Conditional for setting object format to ELF32. Currently we only support elf32
 if(OS_ARCH_TARGET STREQUAL i386)
@@ -147,6 +147,7 @@ set(OS_MODULE_BOOT_NAME ${OS_KERNEL_NAME}-boot)
 # Defines all source-files that are related to the bootloader
 set(OS_MODULE_BOOT_SOURCES
         #${ARCH_TARGET}/boot.asm
+        #src/boot/src/boot.asm
         src/boot/src/boot.cpp
 )
 # Creates a library for our multi-boot section

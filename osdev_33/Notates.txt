@@ -1,0 +1,98 @@
+Forelesning 3 del 1:
+
+
+    etter kommandoen CMake delete cache and Reconfigure : 
+        [cmake] -- The C compiler identification is GNU 11.2.0
+        [cmake] -- The CXX compiler identification is GNU 11.2.0
+        
+        Men per arne har GNU 11.3.0
+
+    osdev_33/CMake (FL3del1 10:00 ish -> 39:40):
+            Vi bruker ASM_NASM (Asembly med NASM dialekt) i dette prosjektet.
+
+        Fyll liste, appen liste console.log liste:
+            set(OS_APPLICATION ${OS_APPLICATION} "Melding fra linje 51 i CMakeList fra osdev33")
+            list(APPEND OS_APPLICATION " og linje 52")
+            message(${OS_APPLICATION})
+
+        Print alle variabler i CMake
+            get_cmake_property(_variableNames VARIABLES)
+            list (SORT _variableNames)
+            foreach (_variableName ${_variableNames})
+                message(STATUS "${_variableName}=${${_variableName}}")
+            endforeach()
+
+    linker.ld 
+        strukturer posisjonen på ting som ligger i "binærfilå dåkkars"
+
+    osdev_33/grub/CMakeLists.txt (FL3del1 39:40 ish -> 43:15):
+
+    osdev_33/grub/CMakeLists.txt (FL3del1 43:15 -> resten):
+            Motivsasjonstale
+
+        Legge til funksjonalitetsfiler i en av de to under (fra osdev_33/CMake)
+            file(GLOB_RECURSE OS_MODULE_KERNEL_SOURCES
+                    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+                    src/kernel/src/*.cpp
+                    src/kernel/src/*.c
+            )
+
+            set(OS_MODULE_BOOT_SOURCES
+                    #${ARCH_TARGET}/boot.asm
+                    #src/boot/src/boot.asm
+                    src/boot/src/boot.cpp
+            )
+
+Forelesning 3 del 2:
+
+    Push eax
+    call main:
+        Er et register
+        pusher eax register inn til main funksjonen
+
+        
+    25:30 
+        stanard c biblioteker som ikke er avhengig av operativsystemer
+        https://wiki.osdev.org/C_Library
+        
+    28:00 
+        uint32_t => unsigned integer(positiv int)
+
+    31:00
+        osdev_33/src/stdlib/include/system.h 
+            Her ligger funksjoner som er inkludert fra statndard library (Uten koden)
+            Koden til en av funksjonene i system.h kan nå legges inn i system.c
+                Om denne ikke defineres riktg får man:
+                    undefined reference to `strlen(char const*)
+                Når man kjører og prøver å bruke "strlen" funksjonen i main
+
+    Write to terminal: ca 36:00
+        Bruk VGA text mode. 
+
+
+Forelesning 4 del 1:
+
+    19:35
+        ; Real mode here
+        mov eax, cr0
+        or eax, 1
+        mov cr0, eax
+        ; Protected mode here
+
+        ; Set up GDT
+
+
+            or => fjerner noen CPU flag som styrer f.eks protected mode
+            or setter cf og of flag == 0 
+            oppdaterer pf, cf og ft flag
+
+    40:40 -> 43:00 EUREKA!?!?!?!?
+        viser GDT_entry som en struct, og linker det til illustrasjonene av dem i forelesningen
+
+Forelesning 4 del 2:
+
+    Hver prosess på maskinen har en Local descriptor table (ldt)
+
+    07:25 "Text og kode er det samme"
+
+    
