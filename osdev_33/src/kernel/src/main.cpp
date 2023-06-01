@@ -1,6 +1,7 @@
-
 #include "system.h"
 #include "screenstuff.h"
+#include "idt/isr.h"
+
 
 // Define entry point in asm to prevent C++ mangling
 extern "C"{
@@ -40,4 +41,18 @@ void kernel_main()
     print_pattern(group,6,10);
     print_pattern(tretitre,7,16);
 
+    UiAOS::CPU::ISR::print_interrupt_message
+
+    // Register your interrupt handler for interrupt 1
+    /*
+    UiAOS::CPU::ISR::register_interrupt_handler(ISR1, UiAOS::CPU::ISR::print_interrupt_message, nullptr);
+    UiAOS::CPU::ISR::register_interrupt_handler(ISR2, UiAOS::CPU::ISR::print_interrupt_message, nullptr);
+    */
+
+
+
+    // Trigger interrupt 1 manually
+    //asm volatile("int $1");
+    
+    while(1){};
 }

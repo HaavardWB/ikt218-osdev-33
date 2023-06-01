@@ -172,14 +172,15 @@ set(OS_LIBRARIES ${OS_LIBRARIES} ${OS_MODULE_BOOT_NAME})
 set(OS_MODULE_KERNEL_NAME ${OS_KERNEL_NAME}-kernel)
 # Define custom compile flags for the kernel
 set(OS_MODULE_KERNEL_COMPILE_FLAGS)
-# Scan the src/kernel directory for source files (c/cpp)
+# Scan the src/kernel directory for source files (c/cpp) ------------------------Prøv å kommenter ut .h filene (src/kernel/src/gdt/*.h ) når alt funker. De blir vist inkludert av .cpp filene
 file(GLOB_RECURSE OS_MODULE_KERNEL_SOURCES
         RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
         src/kernel/src/*.cpp
         src/kernel/src/*.c
-        src/kernel/src/gdt/*.asm
-        src/kernel/src/gdt/*.h
+        src/kernel/src/gdt/*.asm    
         src/kernel/src/gdt/*.cpp
+        src/kernel/src/idt/*.asm
+        src/kernel/src/idt/*.cpp
 )
 # Set the output binary name
 set(OS_MODULE_KERNEL_BINARY kernel.bin)
@@ -195,6 +196,7 @@ add_executable(${OS_MODULE_KERNEL_NAME} ${OS_MODULE_KERNEL_SOURCES})
 target_include_directories(
         ${OS_MODULE_KERNEL_NAME} PUBLIC
         src/kernel/include
+        src/kernel/src
 )
 # Defines which libraries to link against. Linking is where the compiler "glues" together libraries and code pieces.
 target_link_libraries(
