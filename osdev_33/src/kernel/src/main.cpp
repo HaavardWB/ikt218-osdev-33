@@ -37,22 +37,21 @@ void kernel_main()
     
     const char* hei = "Hello World!";
     write_string(2,32,15, hei);
-    write_string(5,30,9,"printed for yoy by");
+    write_string(5,30,9,"printed for you by");
     print_pattern(group,6,10);
     print_pattern(tretitre,7,16);
 
-    UiAOS::CPU::ISR::print_interrupt_message
 
-    // Register your interrupt handler for interrupt 1
-    /*
+     //Register interrupt handler for interrupt 1
+    
     UiAOS::CPU::ISR::register_interrupt_handler(ISR1, UiAOS::CPU::ISR::print_interrupt_message, nullptr);
     UiAOS::CPU::ISR::register_interrupt_handler(ISR2, UiAOS::CPU::ISR::print_interrupt_message, nullptr);
-    */
+    
 
 
 
-    // Trigger interrupt 1 manually
-    //asm volatile("int $1");
+    ///Trigger interrupt 1 manually
+    asm volatile("int $1");
     
     while(1){};
 }
